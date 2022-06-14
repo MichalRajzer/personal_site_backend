@@ -19,12 +19,8 @@ export interface Env {
   // MY_BUCKET: R2Bucket;
 }
 
-export default {
-  async fetch(
-    request: Request,
-    env: Env,
-    ctx: ExecutionContext
-  ): Promise<Response> {
-    return new Response("Hello World!");
-  },
-};
+import { handleRequest } from "./handler";
+
+addEventListener("fetch", (event) => {
+  event.respondWith(handleRequest(event.request));
+});
